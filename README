@@ -1,0 +1,4 @@
+Run Jar:
+   java -jar EightNumber.jar
+
+Or compile Main.java with JDK 8
