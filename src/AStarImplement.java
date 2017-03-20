@@ -31,8 +31,8 @@ public class AStarImplement {
 
         //noinspection ConstantConditions
         if (DEBUG) {
-//            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
-            threshold = new Square(new int[]{2, 8, 3, 1, 0, 4, 7, 6, 5});
+            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
+//            threshold = new Square(new int[]{2, 8, 3, 1, 0, 4, 7, 6, 5});
         } else {
             threshold = inputFromUser();
         }
