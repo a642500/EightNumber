@@ -26,7 +26,7 @@ public class AStarImplement {
     }
 
     public static void main(String[] args) {
-        boolean DEBUG = false;
+        boolean DEBUG = true;
         Square threshold;
 
         //noinspection ConstantConditions
@@ -37,6 +37,8 @@ public class AStarImplement {
             threshold = inputFromUser();
         }
 
+//        AStarImplement aStarImplement = new AStarImplement(new Square(new int[]{5, 0, 8, 4, 2, 1, 7, 3, 6}),
+//                new Square(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0}), new DistanceDiffHeuristic());
         AStarImplement aStarImplement = new AStarImplement(threshold, Square.getSolve(), new DistanceDiffHeuristic());
         long start = System.currentTimeMillis();
         Square solve = aStarImplement.solve();

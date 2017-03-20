@@ -7,7 +7,7 @@ public class DiffHeuristic implements AStarImplement.Heuristic {
     public int estimate(Square start, Square goal) {
         int cost = 0;
         for (int i = 0; i < start.array.length; i++) {
-            if (goal.array[i] != start.array[i]) {
+            if (start.array[i] != 0 && goal.array[i] != start.array[i]) {
                 cost++;
             }
         }
