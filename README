@@ -1,4 +1,4 @@
 Run Jar:
    java -jar EightNumber.jar
 
-Or compile Main.java with JDK 8
+Or compile AStarImplement.java with JDK 8
