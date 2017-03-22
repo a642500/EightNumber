@@ -1,5 +1,5 @@
 /**
- * Created by Carlos on 3/20/17.
+ * Created by Xu Yifan on 3/20/17.
  */
 public class MultipPermutationinversion implements AStarImplement.Heuristic {
 

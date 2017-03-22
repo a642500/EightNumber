@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
- * Created by Carlos on 3/20/17.
+ * Created by Xu Yifan on 3/20/17.
  */
 public class OpenSet {
     private Map<int[], Square> map = new HashMap<>();

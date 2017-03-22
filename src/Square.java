@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Carlos on 3/20/17.
+ * Created by Xu Yifan on 3/20/17.
  */
 @SuppressWarnings("WeakerAccess")
 public class Square implements Comparable<Square> {
