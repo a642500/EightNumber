@@ -1,4 +1,10 @@
 Run Jar:
    java -jar EightNumber.jar
 
-Or compile AStarImplement.java with JDK 8
+Or compile  with JDK 8.
+
+
+1. 代码用到了Java 8 语法，至少使用JDK 8 编译
+2. main方法在AStarImplement类中，主要算法也在AStarImplement中
+3. 作业要求的5种估价函数依次在DiffHeuristic, DistanceDiffHeuristic, PermutationInversion, MultiPermutationInversion 和RowColumnDiffHeuristic这五个类中实现
+4. 除了上述类，还有Square类是对节点的封装，代表了一种棋盘的状态；OpenSet是open表的封装，主要用优先队列（最小堆）以f值作为排序，另外使用了Hash表提高了搜索速度。
