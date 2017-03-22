@@ -1,4 +1,6 @@
 /**
+ * 不在对应列的方块数+不再对应行的方块数
+ *
  * Created by Xu Yifan on 3/20/17.
  */
 public class RowColumnDiffHeuristic implements AStarImplement.Heuristic {

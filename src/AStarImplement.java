@@ -85,7 +85,7 @@ public class AStarImplement {
             case 1:
                 return new DistanceDiffHeuristic();
             case 2:
-                return new Permutationinversion();
+                return new PermutationInversion();
             case 3:
                 return new MultipPermutationinversion();
             case 4:

@@ -1,4 +1,6 @@
 /**
+ * 逆转棋子树木的三倍+位置不符的方块的数目
+ *
  * Created by Xu Yifan on 3/20/17.
  */
 public class MultipPermutationinversion implements AStarImplement.Heuristic {

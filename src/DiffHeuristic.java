@@ -1,4 +1,6 @@
 /**
+ * 计算位置不符的方块的个数
+ *
  * Created by Xu Yifan on 3/20/17.
  */
 public class DiffHeuristic implements AStarImplement.Heuristic {

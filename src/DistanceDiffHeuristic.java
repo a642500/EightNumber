@@ -1,4 +1,6 @@
 /**
+ * 计算位置不符的方块移动到正确位置的移动距离的和， 也就是曼哈顿距离
+ *
  * Created by Xu Yifan on 3/20/17.
  */
 public class DistanceDiffHeuristic implements AStarImplement.Heuristic {

@@ -1,7 +1,9 @@
 /**
+ * 逆转棋子个数目的3倍
+ *
  * Created by Xu Yifan on 3/20/17.
  */
-public class Permutationinversion implements AStarImplement.Heuristic {
+public class PermutationInversion implements AStarImplement.Heuristic {
 
 
     @Override
