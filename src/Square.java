@@ -8,6 +8,7 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 public class Square implements Comparable<Square> {
     private static final Square sSolve = new Square(new int[]{1, 2, 3, 8, 0, 4, 7, 6, 5});
+    private static final Square sSolve2 = new Square(new int[]{1, 2, 3, 4, 0, 5, 6, 7, 8});
     public final int[] array;
     private int g;
     private int f;
@@ -22,6 +23,10 @@ public class Square implements Comparable<Square> {
 
     public static Square getSolve() {
         return sSolve;
+    }
+
+    public static Square getSolve2() {
+        return sSolve2;
     }
 
     public Square getParent() {

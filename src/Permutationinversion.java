@@ -15,6 +15,6 @@ public class Permutationinversion implements AStarImplement.Heuristic {
                 }
             }
         }
-        return cost;
+        return cost * 3;
     }
 }
