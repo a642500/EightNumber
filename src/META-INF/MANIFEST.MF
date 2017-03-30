@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-AStarImplement-Class: AStarImplement
+Main-Class: AStarImplement
 

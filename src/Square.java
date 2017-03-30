@@ -93,6 +93,24 @@ public class Square implements Comparable<Square> {
         return this.f - o.f;
     }
 
+    public String toDotString() {
+        StringBuilder str = new StringBuilder("\"");
+        for (int i = 0; i < array.length; i++) {
+            int num = array[i];
+            if (num != 0)
+                str.append(num);
+            else
+                str.append("  ");
+            if ((i + 1) % 3 == 0) {
+                str.append("\\n");
+            } else {
+                str.append(" ");
+            }
+        }
+        str.append("\"");
+        return str.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("------\n");

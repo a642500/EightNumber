@@ -1,6 +1,12 @@
+import guru.nidi.graphviz.engine.Graphviz;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static guru.nidi.graphviz.engine.Format.PNG;
 
 @SuppressWarnings("WeakerAccess")
 public class AStarImplement {
@@ -10,6 +16,7 @@ public class AStarImplement {
     private final Distance mDistance;
     private OpenSet openSet = new OpenSet();
     private List<Square> closeSet = new ArrayList<>();
+    private DotUtil mDot = new DotUtil();
 
     public AStarImplement(final Square start, final Square target, Heuristic heuristic) {
         this.target = target;
@@ -26,7 +33,7 @@ public class AStarImplement {
     }
 
     public static void main(String[] args) {
-        boolean DEBUG = false;
+        boolean DEBUG = true;
         Square threshold;
         Heuristic heuristic;
         Square target;
@@ -34,9 +41,13 @@ public class AStarImplement {
         //noinspection ConstantConditions
         if (DEBUG) {
             heuristic = new DistanceDiffHeuristic();
-            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
+//            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
             target = Square.getSolve();
 //            threshold = new Square(new int[]{2, 8, 3, 1, 0, 4, 7, 6, 5});
+            threshold = new Square(new int[]{2, 8, 3, 1, 6, 4, 7, 0, 5});
+//            threshold = new Square(new int[]{8, 0, 6, 5, 2, 3, 1, 7, 4});
+//            threshold = new Square(new int[]{0, 3, 4, 5, 1, 6, 7, 8, 2});
+//            threshold = new Square(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
         } else {
             target = inputTargetSquareFromUser();
             threshold = inputSquareFromUser();
@@ -64,6 +75,13 @@ public class AStarImplement {
             System.out.println(String.format("found result, openSize: %d, closeSize: %d",
                     aStarImplement.openSet.size(), aStarImplement.closeSet.size()));
             System.out.println(String.format("Cost time: %d ms", duration));
+
+            String dot = aStarImplement.mDot.build();
+            try {
+                Graphviz.fromString(dot).width(19200).height(10800).render(PNG).toFile(new File("ouput.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -177,6 +195,7 @@ public class AStarImplement {
                     int g = curr.g() + mDistance.distance(curr, it);
                     it.setG(g);
                     it.setParent(curr);
+                    mDot.link(curr, it);
 
                     Square node = openSet.get(it);
                     if (node == null) {
