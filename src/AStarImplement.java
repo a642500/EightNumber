@@ -40,7 +40,7 @@ public class AStarImplement {
 
         //noinspection ConstantConditions
         if (DEBUG) {
-            heuristic = new DistanceDiffHeuristic();
+            heuristic = new DiffHeuristic();
 //            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
             target = Square.getSolve();
 //            threshold = new Square(new int[]{2, 8, 3, 1, 0, 4, 7, 6, 5});
@@ -69,6 +69,7 @@ public class AStarImplement {
             Square curr = solve;
             while (curr != null) {
                 System.out.println(curr);
+                aStarImplement.mDot.mark(curr);
                 curr = curr.getParent();
             }
 
@@ -78,7 +79,7 @@ public class AStarImplement {
 
             String dot = aStarImplement.mDot.build();
             try {
-                Graphviz.fromString(dot).width(19200).height(10800).render(PNG).toFile(new File("ouput.png"));
+                Graphviz.fromString(dot).width(1920).height(1080).render(PNG).toFile(new File("output.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -176,7 +177,33 @@ public class AStarImplement {
         return square;
     }
 
+    boolean canSolve() {
+        int inverse = 0;
+        for (int i = 0; i < threshold.array.length; i++) {
+            for (int j = i + 1; j < threshold.array.length; j++) {
+                if (threshold.array[j] != 0 && threshold.array[j] < threshold.array[i]) {
+                    inverse++;
+                }
+            }
+        }
+
+        int inverse2 = 0;
+        for (int i = 0; i < target.array.length; i++) {
+            for (int j = i + 1; j < target.array.length; j++) {
+                if (target.array[j] != 0 && target.array[j] < target.array[i]) {
+                    inverse2++;
+                }
+            }
+        }
+
+        return inverse % 2 == inverse2 % 2;
+    }
+
     Square solve() {
+        if (!canSolve()) {
+            return null;
+        }
+
 
         openSet.add(threshold);
 
@@ -195,18 +222,17 @@ public class AStarImplement {
                     int g = curr.g() + mDistance.distance(curr, it);
                     it.setG(g);
                     it.setParent(curr);
-                    mDot.link(curr, it);
 
                     Square node = openSet.get(it);
                     if (node == null) {
                         it.setF(g + mHeuristic.estimate(it, target));
+                        mDot.link(curr, it);
                         openSet.add(it);
-                    } else {
-                        if (g < node.g()) {
-                            it.setF(g + mHeuristic.estimate(it, target));
-                            openSet.remove(node);
-                            openSet.add(it);
-                        }
+                    } else if (g < node.g()) {
+                        it.setF(g + mHeuristic.estimate(it, target));
+                        openSet.remove(node);
+                        mDot.link(curr, it);
+                        openSet.add(it);
                     }
                 }
             });
