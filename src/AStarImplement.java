@@ -1,4 +1,5 @@
 import guru.nidi.graphviz.engine.Graphviz;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.util.Scanner;
 
 import static guru.nidi.graphviz.engine.Format.PNG;
 
-@SuppressWarnings("WeakerAccess")
 public class AStarImplement {
     private final Square target;
     private final Square threshold;
@@ -16,7 +16,7 @@ public class AStarImplement {
     private final Distance mDistance;
     private OpenSet openSet = new OpenSet();
     private List<Square> closeSet = new ArrayList<>();
-    private DotUtil mDot = new DotUtil();
+    private DotUtil mDot = new DotUtilMapImpl();
 
     public AStarImplement(final Square start, final Square target, Heuristic heuristic) {
         this.target = target;
@@ -37,16 +37,20 @@ public class AStarImplement {
         Square threshold;
         Heuristic heuristic;
         Square target;
+        boolean outputAsDot = false;
+        String outputFileName = "output";
 
         //noinspection ConstantConditions
         if (DEBUG) {
-            heuristic = new DiffHeuristic();
+            heuristic = new DistanceDiffHeuristic();
 //            threshold = new Square(new int[]{2, 0, 1, 4, 6, 5, 3, 7, 8});
             target = Square.getSolve();
 //            threshold = new Square(new int[]{2, 8, 3, 1, 0, 4, 7, 6, 5});
-            threshold = new Square(new int[]{2, 8, 3, 1, 6, 4, 7, 0, 5});
+//            threshold = new Square(new int[]{2, 8, 3, 1, 6, 4, 7, 0, 5});
 //            threshold = new Square(new int[]{8, 0, 6, 5, 2, 3, 1, 7, 4});
-//            threshold = new Square(new int[]{0, 3, 4, 5, 1, 6, 7, 8, 2});
+            threshold = new Square(new int[]{0, 3, 4, 5, 1, 6, 7, 8, 2});
+            outputFileName = "3-2";
+            outputAsDot = true;
 //            threshold = new Square(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
         } else {
             target = inputTargetSquareFromUser();
@@ -79,7 +83,12 @@ public class AStarImplement {
 
             String dot = aStarImplement.mDot.build();
             try {
-                Graphviz.fromString(dot).width(1920).height(1080).render(PNG).toFile(new File("output.png"));
+                //noinspection ConstantConditions
+                if (outputAsDot) {
+                    FileUtils.writeStringToFile(new File(outputFileName + ".dot"), dot, "UTF-8");
+                } else {
+                    Graphviz.fromString(dot).width(1920).height(1080).render(PNG).toFile(new File(outputFileName + ".png"));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -175,6 +184,18 @@ public class AStarImplement {
 
         System.out.println("You input is :\n" + square);
         return square;
+    }
+
+    public DotUtil getDot() {
+        return mDot;
+    }
+
+    public OpenSet getOpenSet() {
+        return openSet;
+    }
+
+    public List<Square> getCloseSet() {
+        return closeSet;
     }
 
     boolean canSolve() {
