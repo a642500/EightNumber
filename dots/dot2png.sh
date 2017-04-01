@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 while read file; do
     dirname=$(dirname "$file")

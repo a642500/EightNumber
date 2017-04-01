@@ -1,5 +1,5 @@
 /**
- * Created by Carlos on 4/1/17.
+ * Created by Xu Yifan on 4/1/17.
  */
 public class DotUtilStringImpl implements DotUtil {
     private StringBuilder mStringBuilder = new StringBuilder("digraph G { node [shape=box];");
